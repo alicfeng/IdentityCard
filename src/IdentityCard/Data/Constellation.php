@@ -5,7 +5,11 @@
 
 namespace AlicFeng\IdentityCard\Data;
 
-
+/**
+ * 星座数据
+ * Class Constellation
+ * @package AlicFeng\IdentityCard\Data
+ */
 class Constellation
 {
     const DATA = [

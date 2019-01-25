@@ -1,5 +1,5 @@
 {
-  "name": "alicfeng/id",
+  "name": "alicfeng/identity-card",
   "description": "IdentityCard Library",
   "type": "library",
   "license": "MIT",
@@ -12,7 +12,7 @@
   ],
   "authors": [
     {
-      "name": "alicfeng",
+      "name": "AlicFeng",
       "email": "a@samego.com"
     }
   ],

@@ -2,9 +2,16 @@
 
 namespace AlicFeng\IdentityCard;
 
-
 use AlicFeng\IdentityCard\Data\Constellation;
 
+/**
+ * 身份证工具类
+ * 使用身份证计算年龄、生日、星座、性别、生肖
+ * Class IdentityCard
+ * @package AlicFeng\IdentityCard
+ * @Author AlicFeng
+ * @email a@samego.com
+ */
 class IdentityCard
 {
     /**
@@ -95,7 +102,7 @@ class IdentityCard
         }
 
         $month = (int)substr($id, 10, 2);
-        $day = (int)substr($id, 12, 2);
+        $day   = (int)substr($id, 12, 2);
         if (($month == 1 && $day <= 21) || ($month == 2 && $day <= 19)) {
             return '水瓶座';
         } else if (($month == 2 && $day > 20) || ($month == 3 && $day <= 20)) {
