@@ -1,0 +1,35 @@
+{
+  "name": "alicfeng/id",
+  "description": "IdentityCard Library",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "IdentityCard",
+    "identify",
+    "china",
+    "id",
+    "idCard"
+  ],
+  "authors": [
+    {
+      "name": "alicfeng",
+      "email": "a@samego.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "AlicFeng\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "@stable"
+  },
+  "minimum-stability": "stable",
+  "require": {
+  }
+}
