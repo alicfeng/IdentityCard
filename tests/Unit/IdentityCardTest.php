@@ -14,10 +14,11 @@ use PHPUnit\Framework\TestCase;
 
 class IdentityCardTest extends TestCase
 {
-    const ID = '44170119906020016';
+    const ID = '441701199506020016';
+
     public function testGetBirthday()
     {
-        $expect = '199-06-02';
+        $expect = '1995-06-02';
         try {
             $this->assertEquals($expect, IdentityCard::birthday(self::ID));
         }

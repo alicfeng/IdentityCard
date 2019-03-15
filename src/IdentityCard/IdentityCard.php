@@ -55,7 +55,7 @@ class IdentityCard
      * @functionName   根据身份证号码计算年龄
      * @description    根据身份证号码计算年龄
      * @param string $id 身份证号码
-     * @return bool|int
+     * @return int
      * @throws CertificateException
      */
     public static function age($id)
@@ -65,7 +65,7 @@ class IdentityCard
         }
         $ageTime = strtotime(substr($id, 6, 8));
         if ($ageTime === false) {
-            return false;
+            throw new CertificateException('certificate format error');
         }
         list($aYear, $aMonth, $aDay) = explode('-', date('Y-m-d', $ageTime));
 
