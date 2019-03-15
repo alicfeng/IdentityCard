@@ -5,9 +5,9 @@
 
 在项目`composer.json`添加依赖，如下：
 
-```
+```json
 "require": {
-        "alicfeng/identity-card": "~1.0"
+        "alicfeng/identity-card": "~2.0"
 }
 ```
 
@@ -25,7 +25,11 @@ ___
 
 #### 使用
 
-> 注意：如下的所有调用API中，证件号码错误都是返回`false`
+> 注意：
+>
+> 在版本1.0中，证件号码错误都是返回`false`。
+>
+> 在版本2.0中添加异常捕获机制，证件错误将返回异常，只有`c::validate($id)`方法返回`bool`值。
 
 ```php
 use AlicFeng\IdentityCard\IdentityCard;

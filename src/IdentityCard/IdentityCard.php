@@ -3,46 +3,47 @@
 namespace AlicFeng\IdentityCard;
 
 use AlicFeng\IdentityCard\Data\Constellation;
+use AlicFeng\IdentityCard\Exception\CertificateException;
 
 /**
- * 身份证工具类
- * 使用身份证计算年龄、生日、星座、性别、生肖
+ * 中国（大陆）公民身份证工具类
+ * @description 使用身份证计算年龄、生日、星座、性别、生肖
  * Class IdentityCard
+ * 添加了异常捕获机制，针对证件ID捕获证件异常
  * @package AlicFeng\IdentityCard
  * @Author AlicFeng
+ * @datetime 2019-03-15
  * @email a@samego.com
  */
 class IdentityCard
 {
     /**
-     * 获取性别
-     * 男为M | 女为F | false表示身份证错误
-     * @author AlicFeng
+     * @functionName   获取性别
+     * @description    男为M | 女为F
      * @param string $id 身份证号码
-     * @return bool|int
+     * @return string
+     * @throws CertificateException
      */
     public static function sex($id)
     {
-        if (!self::validate($id)) {
-            return false;
+        if (false === self::validate($id)) {
+            throw new CertificateException('certificate format error');
         }
         return substr($id, (strlen($id) == 15 ? -2 : -1), 1) % 2 ? 'F' : 'M';
     }
 
     /**
-     * 获取出生年月日
-     * 格式为 yyyy-mm-dd
-     * @author AlicFeng
+     * @functionName   获取出生年月日
+     * @description    格式为 yyyy-mm-dd
      * @param string $id 身份证号码
-     * @return bool|string
+     * @return string
+     * @throws CertificateException
      */
     public static function birthday($id)
     {
-        $id = self::check($id);
-        if (false == $id) {
-            return false;
+        if (false === self::validate($id)) {
+            throw new CertificateException('certificate format error');
         }
-
         $bir   = substr($id, 6, 8);
         $year  = substr($bir, 0, 4);
         $month = substr($bir, 4, 2);
@@ -51,15 +52,16 @@ class IdentityCard
     }
 
     /**
-     *  根据身份证号码计算年龄
-     * @author AlicFeng
+     * @functionName   根据身份证号码计算年龄
+     * @description    根据身份证号码计算年龄
      * @param string $id 身份证号码
-     * @return int|bool
+     * @return bool|int
+     * @throws CertificateException
      */
     public static function age($id)
     {
-        if (!self::validate($id)) {
-            return false;
+        if (false === self::validate($id)) {
+            throw new CertificateException('certificate format error');
         }
         $ageTime = strtotime(substr($id, 6, 8));
         if ($ageTime === false) {
@@ -79,28 +81,33 @@ class IdentityCard
     }
 
     /**
-     * 获取生肖
+     * @functionName   获取生肖
+     * @description    返回生肖的中文名称
      * @param string $id 身份证号码
-     * @return bool
+     * @return string
+     * @throws CertificateException
      */
     public static function constellation($id)
     {
-        $id = self::check($id);
-        if (false == $id) {
-            return false;
+        if (false === self::validate($id)) {
+            throw new CertificateException('certificate format error');
         }
-
         $year = substr($id, 6, 4);
         return Constellation::DATA[($year - 4) % 12];
     }
 
+    /**
+     * @functionName   获取星座
+     * @description    返回星座的中文名称
+     * @param string $id 身份证号码
+     * @return bool|string
+     * @throws CertificateException
+     */
     public static function star($id)
     {
-        $id = self::check($id);
-        if (false == $id) {
-            return false;
+        if (false === self::validate($id)) {
+            throw new CertificateException('certificate format error');
         }
-
         $month = (int)substr($id, 10, 2);
         $day   = (int)substr($id, 12, 2);
         if (($month == 1 && $day <= 21) || ($month == 2 && $day <= 19)) {
@@ -132,9 +139,8 @@ class IdentityCard
     }
 
     /**
-     * 校验身份证证件的正确性
-     * 正确为true | 错误为false
-     * @author AlicFeng
+     * @functionName   校验身份证证件的正确性
+     * @description    校验身份证证件的正确性
      * @param string $id 身份证号码
      * @return bool
      */
@@ -150,9 +156,8 @@ class IdentityCard
     }
 
     /**
-     * 计算身份证的最后一位验证码
-     * 根据国家标准GB 11643-1999，前提必须是18位的证件号
-     * @author AlicFeng
+     * @functionName 计算身份证的最后一位验证码
+     * @description 根据国家标准GB 11643-1999，前提必须是18位的证件号
      * @param string $idBody 证件号码的前17位数字
      * @return bool|mixed
      */
@@ -176,8 +181,7 @@ class IdentityCard
     }
 
     /**
-     * 将15位身份证升级到18位
-     * @author AlicFeng
+     * @functionName  将15位身份证升级到18位
      * @param string $id 身份证号码
      * @return bool|string
      */
@@ -197,8 +201,7 @@ class IdentityCard
     }
 
     /**
-     * 校验18位身份证的有效性
-     * @author AlicFeng
+     * @functionName 校验18位身份证的有效性
      * @param string $id 身份证号码
      * @return bool
      */
@@ -216,22 +219,5 @@ class IdentityCard
         }
 
         return false;
-    }
-
-    /**
-     * 校验18位身份证的有效性
-     * 正确则返回18位身份证号码，否则返回false
-     * @param string $id 身份证号码
-     * @return bool|string
-     */
-    public static function check($id)
-    {
-        if (!self::validate($id)) {
-            return false;
-        }
-        if (15 == strlen($id)) {
-            $id = self::convert15to18($id);
-        }
-        return $id;
     }
 }
