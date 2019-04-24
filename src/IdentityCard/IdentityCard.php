@@ -17,9 +17,12 @@ use AlicFeng\IdentityCard\Exception\CertificateException;
  */
 class IdentityCard
 {
+    const SIGN_MALE   = 'M';
+    const SIGN_FEMALE = 'F';
+
     /**
      * @functionName   获取性别
-     * @description    男为M | 女为F
+     * @description    男为M | 女为F case 15 最后一位奇男偶女 case 18 倒数第二位奇男偶女
      * @param string $id 身份证号码
      * @return string
      * @throws CertificateException
@@ -29,7 +32,8 @@ class IdentityCard
         if (false === self::validate($id)) {
             throw new CertificateException('certificate format error');
         }
-        return substr($id, (strlen($id) == 15 ? -2 : -1), 1) % 2 ? 'F' : 'M';
+        $signPick = intval(substr($id, (strlen($id) === 15 ? -1 : -2), 1));
+        return 0 === ($signPick & 1) ? self::SIGN_FEMALE : self::SIGN_MALE;
     }
 
     /**
