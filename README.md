@@ -1,5 +1,25 @@
-# IdentityCard
-**中国（大陆）公民身份证类**
+<h1 align="center">
+    <a href="https://github.com/alicfeng/identity-card">
+        IdentityCard
+    </a>
+</h1>
+<p align="center"> 
+    中国（大陆）公民身份证类
+    <img src="https://raw.githubusercontent.com/alicfeng/identity-card/master/file/runtime.jpg" />
+</p>
+<p align="center">
+	<a href="https://packagist.org/packages/alicfeng/identity-card">
+    	<img src="https://poser.pugx.org/alicfeng/identity-card/v/stable.svg" alt="Latest Stable Version">
+    </a>
+    <a href="https://packagist.org/packages/alicfeng/identity-card">
+        <img src="https://poser.pugx.org/alicfeng/identity-card/d/total.svg" alt="Total Downloads">
+    </a>
+	<a href="https://packagist.org/packages/alicfeng/identity-card">
+    	<img src="https://poser.pugx.org/alicfeng/identity-card/license.svg" alt="License">
+    </a>
+</p>
+
+
 
 #### 安装
 
