@@ -5,7 +5,6 @@
 </h1>
 <p align="center"> 
     中国（大陆）公民身份证类
-    <img src="https://raw.githubusercontent.com/alicfeng/identity-card/master/file/runtime.jpg" />
 </p>
 <p align="center">
 	<a href="https://packagist.org/packages/alicfeng/identity-card">
