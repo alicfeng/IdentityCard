@@ -17,6 +17,7 @@ use AlicFeng\IdentityCard\Exception\CertificateException;
  */
 class IdentityCard
 {
+    /*男:M 女:F*/
     const SIGN_MALE   = 'M';
     const SIGN_FEMALE = 'F';
 
