@@ -16,7 +16,7 @@
   <a href="https://packagist.org/packages/alicfeng/identity-card">
     <img src="https://poser.pugx.org/alicfeng/identity-card/license.svg" alt="License">
   </a>
-  <a href="https://github.com/alicfeng/identity-card">
+  <a href="https://github.com/alicfeng/IdentityCard">
     <img src="https://travis-ci.org/alicfeng/IdentityCard.svg?branch=master" alt="build status">
   </a>
 </p>
