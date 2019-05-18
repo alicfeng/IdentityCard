@@ -7,15 +7,22 @@
     中国（大陆）公民身份证类
 </p>
 <p align="center">
-	<a href="https://packagist.org/packages/alicfeng/identity-card">
-    	<img src="https://poser.pugx.org/alicfeng/identity-card/v/stable.svg" alt="Latest Stable Version">
-    </a>
+      <a href="https://packagist.org/packages/alicfeng/identity-card">
+            <img src="https://poser.pugx.org/alicfeng/identity-card/v/stable.svg" alt="Latest Stable Version">
+     </a>
     <a href="https://packagist.org/packages/alicfeng/IdentityCard">
         <img src="https://poser.pugx.org/alicfeng/identity-card/d/total.svg" alt="Total Downloads">
     </a>
 	<a href="https://packagist.org/packages/alicfeng/identity-card">
-    	<img src="https://poser.pugx.org/alicfeng/identity-card/license.svg" alt="License">
-    </a>
+    	 <img src="https://poser.pugx.org/alicfeng/identity-card/license.svg" alt="License">
+        </a>
+
+​      <a href="https://github.com/alicfeng/identity-card">
+
+​            <img src="https://travis-ci.org/alicfeng/IdentityCard.svg?branch=master" alt="build status">
+
+​     </a>
+
 </p>
 
 
