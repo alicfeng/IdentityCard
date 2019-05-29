@@ -7,7 +7,7 @@ use AlicFeng\IdentityCard\Exception\CertificateException;
 
 /**
  * 中国（大陆）公民身份证工具类
- * @description 使用身份证计算年龄、生日、星座、性别、生肖
+ * @description 使用身份证计算年龄、生日、星座、性别、生肖，以及通过生日获取年龄
  * Class IdentityCard
  * 添加了异常捕获机制，针对证件ID捕获证件异常
  * @package AlicFeng\IdentityCard
@@ -224,5 +224,27 @@ class IdentityCard
         }
 
         return false;
+    }
+
+    /**
+     * @functionName 通过生日获取年龄
+     * @param int $birthday 生日日期时间戳
+     * @param bool $current 参考日期时间戳
+     * @return mixed 年龄
+     */
+    public static function ageByBirthday($birthday, $current = false)
+    {
+        if (false === $current) {
+            $current = time();
+        }
+        list($birthdayYear, $birthdayMonth, $birthdayDay) = explode('-', date('Y-m-d', $birthday));
+        list($currentYear, $currentMonth, $currentDay) = explode('-', date('Y-m-d', $current));
+
+        //开始计算年龄
+        $age = $currentYear - $birthdayYear;
+        if ($birthdayMonth > $currentMonth || $birthdayMonth == $currentMonth && $birthdayDay > $currentDay) {
+            $age--;
+        }
+        return $age;
     }
 }

@@ -21,8 +21,7 @@ class IdentityCardTest extends TestCase
         $expect = '1995-06-02';
         try {
             $this->assertEquals($expect, IdentityCard::birthday(self::ID));
-        }
-        catch (CertificateException $e) {
+        } catch (CertificateException $e) {
 
         }
     }
@@ -32,8 +31,7 @@ class IdentityCardTest extends TestCase
         $expect = 'M';
         try {
             $this->assertEquals($expect, IdentityCard::sex(self::ID));
-        }
-        catch (CertificateException $e) {
+        } catch (CertificateException $e) {
         }
     }
 
@@ -42,8 +40,7 @@ class IdentityCardTest extends TestCase
         $expect = 23;
         try {
             $this->assertEquals($expect, IdentityCard::age(self::ID));
-        }
-        catch (CertificateException $e) {
+        } catch (CertificateException $e) {
         }
     }
 
@@ -52,8 +49,7 @@ class IdentityCardTest extends TestCase
         $expect = '猪';
         try {
             $this->assertEquals($expect, IdentityCard::constellation(self::ID));
-        }
-        catch (CertificateException $e) {
+        } catch (CertificateException $e) {
         }
     }
 
@@ -62,8 +58,13 @@ class IdentityCardTest extends TestCase
         $expect = '双子座';
         try {
             $this->assertEquals($expect, IdentityCard::star(self::ID));
+        } catch (CertificateException $e) {
         }
-        catch (CertificateException $e) {
-        }
+    }
+
+    public function testAgeByBirthday()
+    {
+        $birthday = strtotime('1995-06-02');
+        $this->assertEquals(IdentityCard::ageByBirthday($birthday,strtotime('2019-06-01')), 23);
     }
 }
