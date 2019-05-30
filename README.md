@@ -55,6 +55,7 @@ ___
 
 ```php
 use AlicFeng\IdentityCard\IdentityCard;
+use AlicFeng\IdentityCard\Birthday;
 
 $id = 'IdentityCard';
 
@@ -72,5 +73,11 @@ $constellation = IdentityCard::constellation($id);
 
 # 获取星座
 $star = IdentityCard::star($id);
+
+# 获取星座
+$star = Birthday::star($birthday);
+
+# 获取年龄
+$age = Birthday::age($id);
 ```
 

@@ -61,10 +61,4 @@ class IdentityCardTest extends TestCase
         } catch (CertificateException $e) {
         }
     }
-
-    public function testAgeByBirthday()
-    {
-        $birthday = strtotime('1995-06-02');
-        $this->assertEquals(IdentityCard::ageByBirthday($birthday,strtotime('2019-06-01')), 23);
-    }
 }
