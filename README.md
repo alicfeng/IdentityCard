@@ -27,16 +27,16 @@
 
 在项目`composer.json`添加依赖，如下：
 
-```json
+```
 "require": {
-        "alicfeng/identity-card": "~2.0"
+        "alicfeng/identity-card": "~2.2"
 }
 ```
 
 或者直接通过`CLI`安装，如下：
 
 ```shell
-composer require "alicfeng/identity-card"
+composer require "alicfeng/identity-card" -vvv
 ```
 
 
