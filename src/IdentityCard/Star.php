@@ -16,7 +16,7 @@ class Star
      */
     public static function query($month, $day)
     {
-        if (($month == 1 && $day <= 20) && ($month == 2 && $day <= 18)) {
+        if (($month == 1 && $day <= 20) || ($month == 2 && $day <= 18)) {
             return '水瓶座';
         } else if (($month == 2 && $day >= 19) || ($month == 3 && $day <= 20)) {
             return '双鱼座';
