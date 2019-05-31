@@ -7,12 +7,13 @@ use AlicFeng\IdentityCard\Exception\CertificateException;
 
 /**
  * 中国（大陆）公民身份证工具类
- * @description 使用身份证计算年龄、生日、星座、性别、生肖，以及通过生日获取年龄
+ * @description 使用身份证计算年龄、生日、星座、性别、生肖
  * Class IdentityCard
  * 添加了异常捕获机制，针对证件ID捕获证件异常
  * @package AlicFeng\IdentityCard
  * @Author AlicFeng
  * @datetime 2019-03-15
+ * @website https://www.samego.com
  * @email a@samego.com
  */
 class IdentityCard
