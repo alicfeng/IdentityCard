@@ -6,7 +6,10 @@ os:
 language: php
 
 php:
-  - 7.3.4
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
 
 cache:
   directories:

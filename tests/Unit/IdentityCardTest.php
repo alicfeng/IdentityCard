@@ -37,7 +37,7 @@ class IdentityCardTest extends TestCase
 
     public function testGetAge()
     {
-        $expect = 23;
+        $expect = 24;
         try {
             $this->assertEquals($expect, IdentityCard::age(self::ID));
         } catch (CertificateException $e) {
@@ -60,5 +60,19 @@ class IdentityCardTest extends TestCase
             $this->assertEquals($expect, IdentityCard::star(self::ID));
         } catch (CertificateException $e) {
         }
+    }
+
+    public function testCreateIdCardImage()
+    {
+        $frontImage = IdentityCard::createFrontImage('冯大叔', '男', '汉', 1560089097, '广东省阳江市海陵镇试验区某某村委会某某村888号', '441701199506028888');
+        imagepng($frontImage, 'front.png');
+        imagedestroy($frontImage);
+
+        $backImage = IdentityCard::createBackImage('2016.06.02', '2026.12.08');
+        imagepng($backImage, 'back.png');
+        imagedestroy($backImage);
+
+        $this->assertFileExists('front.png');
+        $this->assertFileExists('back.png');
     }
 }

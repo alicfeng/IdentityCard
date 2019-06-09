@@ -33,5 +33,7 @@
   },
   "minimum-stability": "stable",
   "require": {
+    "ext-gd": "*",
+    "ext-iconv": "*"
   }
 }

@@ -50,8 +50,12 @@ ___
 > 注意：
 >
 > 在版本1.0中，证件号码错误都是返回`false`。
->
+
 > 在版本2.0中添加异常捕获机制，证件错误将返回异常，只有`c::validate($id)`方法返回`bool`值。
+
+> 在版本2.3添加了一个新功能，可以提供身份证信息生成身份证图片
+>
+> 注意：图片的大小为：865 * 540 px
 
 ```php
 use AlicFeng\IdentityCard\IdentityCard;
@@ -79,5 +83,11 @@ $star = Birthday::star($birthday);
 
 # 获取年龄
 $age = Birthday::age($id);
+
+# 生成身份证正面
+$front(resource) = IdentityCard::createFrontImage(...);
+
+# 生成身份证反面
+$back(resource) = IdentityCard::createBackImage(...);
 ```
 
