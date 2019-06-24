@@ -10,12 +10,11 @@ namespace Tests\Unit;
 use AlicFeng\IdentityCard\Exception\CertificateException;
 use AlicFeng\IdentityCard\IdentityCard;
 
-use PHPUnit\Framework\TestCase;
 
-class IdentityCardTest extends TestCase
+use Tests\BaseTestCase;
+
+class IdentityCardTest extends BaseTestCase
 {
-    const ID = '441701199506020016';
-
     public function testGetBirthday()
     {
         $expect = '1995-06-02';

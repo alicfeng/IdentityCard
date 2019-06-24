@@ -16,10 +16,11 @@ use AlicFeng\IdentityCard\Exception\BirthdayException;
  *
  * @description 使用出生年月日计算年龄、星座
  * Class Birthday
- * @Author AlicFeng
- * @datetime 2019-05-31
+ * @Author      AlicFeng
+ * @datetime    2019-05-31
  * @website https://www.samego.com
- * @email a@samego.com
+ * @github  https://github.com/alicfeng
+ * @email   a@samego.com
  */
 class Birthday
 {

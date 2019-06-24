@@ -24,10 +24,13 @@ use AlicFeng\IdentityCard\Exception\CertificateException;
  * @Author      AlicFeng
  * @datetime    2019-03-15
  * @website https://www.samego.com
- * @email a@samego.com
+ * @github  https://github.com/alicfeng
+ * @email   a@samego.com
  */
 class IdentityCard
 {
+    use Area;
+
     /*男:M 女:F*/
     const SIGN_MALE   = 'M';
     const SIGN_FEMALE = 'F';

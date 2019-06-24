@@ -27,9 +27,9 @@
 
 在项目`composer.json`添加依赖，如下：
 
-```
+```json
 "require": {
-        "alicfeng/identity-card": "~2.2"
+        "alicfeng/identity-card": "~3.0"
 }
 ```
 
@@ -45,17 +45,47 @@ ___
 
 
 
+#### 版本更新说明
+
+- V1.0
+
+  在版本 `1.0` 中，证件号码错误都是返回`false`。
+
+- V2.0
+
+  在版本 `2.0` 中添加异常捕获机制，证件错误将返回异常，只有`c::validate($id)`方法返回`bool`值。
+
+- V2.3
+
+  在版本 `2.3` 添加了一个新功能，可以提供身份证信息生成身份证图片。
+
+  >  注意：图片的大小为：865 * 540 px
+
+- V3.0
+
+  在版本 `3.0` 添加了根据省份正号码获取省、市、区行政地区中文名称。
+
+  > 行政地区编码源于[中华人民共和国民政部](http://www.mca.gov.cn/)，更新于 `2019-06-21`。
+
+
+
+___
+
+
+
 #### 使用
 
 > 注意：
 >
-> 在版本1.0中，证件号码错误都是返回`false`。
+> 在版本 `1.0` 中，证件号码错误都是返回`false`。
 
-> 在版本2.0中添加异常捕获机制，证件错误将返回异常，只有`c::validate($id)`方法返回`bool`值。
+> 在版本 `2.0` 中添加异常捕获机制，证件错误将返回异常，只有`c::validate($id)`方法返回`bool`值。
 
-> 在版本2.3添加了一个新功能，可以提供身份证信息生成身份证图片
+> 在版本 `2.3` 添加了一个新功能，可以提供身份证信息生成身份证图片。
 >
 > 注意：图片的大小为：865 * 540 px
+
+> 在版本 `3.0` 添加了根据省份正号码获取省、市、区行政地区中文名称。
 
 ```php
 use AlicFeng\IdentityCard\IdentityCard;
@@ -89,5 +119,14 @@ $front(resource) = IdentityCard::createFrontImage(...);
 
 # 生成身份证反面
 $back(resource) = IdentityCard::createBackImage(...);
+
+# 获取省
+$province = IdentityCard::privince($id, $default='');
+
+# 获取市
+$province = IdentityCard::city($id, $default='');
+
+# 获取区
+$province = IdentityCard::area($id, $default='');
 ```
 

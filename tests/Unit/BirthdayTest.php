@@ -8,9 +8,9 @@ namespace Tests\Unit;
 
 use AlicFeng\IdentityCard\Birthday;
 use AlicFeng\IdentityCard\Exception\BirthdayException;
-use PHPUnit\Framework\TestCase;
+use Tests\BaseTestCase;
 
-class BirthdayTest extends TestCase
+class BirthdayTest extends BaseTestCase
 {
     const BIRTHDAY = '1995-06-02';
 
