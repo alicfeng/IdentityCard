@@ -112,9 +112,9 @@ $back(resource) = IdentityCard::createBackImage(...);
 $province = IdentityCard::privince($id, $default='');
 
 # 获取市
-$province = IdentityCard::city($id, $default='');
+$city = IdentityCard::city($id, $default='');
 
 # 获取区
-$province = IdentityCard::area($id, $default='');
+$area = IdentityCard::area($id, $default='');
 ```
 
