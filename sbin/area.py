@@ -23,7 +23,7 @@ def generate_json_collect(tr_list):
     collect = {}
     for tr in tr_list:
         td_list = tr.findAll('td')
-        collect[td_list[1].string] = td_list[2].text
+        collect[td_list[1].string.strip()] = td_list[2].text.strip()
     return collect
 
 
@@ -37,7 +37,7 @@ def generate_php_collect(collect):
         file.write('class Area\n{\n')
         file.write('\tconst DATA = [\n')
         for key, value in collect.items():
-            file.write('\t\t' + '\'' + key + '\'=>' + '\'' + value + '\',\n')
+            file.write('\t\t' + '\'' + key.strip() + '\'=>' + '\'' + value.strip() + '\',\n')
         file.write('];\n}\n')
         file.flush()
         file.close()
@@ -57,7 +57,7 @@ def generate_json(collect):
 
 
 if __name__ == '__main__':
-    url = 'http://www.mca.gov.cn/article/sj/xzqh/2019/201901-06/201906211048.html'
+    url = 'http://www.mca.gov.cn/article/sj/xzqh/2019/2019/201911250933.html'
     source = query_page_source(url)
     tr_list = query_td_tags(source)
     collect = generate_json_collect(tr_list)

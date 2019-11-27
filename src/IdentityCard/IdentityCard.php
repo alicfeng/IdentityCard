@@ -16,14 +16,14 @@ use AlicFeng\IdentityCard\Exception\CertificateException;
 /**
  * 中国（大陆）公民身份证工具类.
  *
- * @description 使用身份证计算年龄、生日、星座、性别、生肖
+ * @description 使用身份证计算年龄、生日、星座、性别、生肖、政区划代码，同时绘制身份证正反面
  * Class IdentityCard
  *
  * @version     2.x 添加了异常捕获机制，针对证件ID捕获证件异常
  * @version     2.3 增加身份证正反面图片生成
+ * @version     3.0.1 更新中华人民共和国行政区划代码
  * @Author      AlicFeng
- * @datetime    2019-03-15
- * @website https://www.samego.com
+ * @datetime    2019-11-27
  * @github  https://github.com/alicfeng
  * @email   a@samego.com
  */

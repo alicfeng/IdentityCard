@@ -9,6 +9,8 @@
 
 namespace AlicFeng\IdentityCard\Exception;
 
-class CertificateException extends \Exception
+use Exception;
+
+class CertificateException extends Exception
 {
 }

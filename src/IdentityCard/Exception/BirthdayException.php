@@ -9,6 +9,8 @@
 
 namespace AlicFeng\IdentityCard\Exception;
 
-class BirthdayException extends \Exception
+use Exception;
+
+class BirthdayException extends Exception
 {
 }
