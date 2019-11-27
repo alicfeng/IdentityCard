@@ -28,8 +28,10 @@
 在项目`composer.json`添加依赖，如下：
 
 ```json
+{
 "require": {
-        "alicfeng/identity-card": "~3.0"
+    "alicfeng/identity-card": "~3.0.1"
+  }
 }
 ```
 
@@ -67,8 +69,9 @@ ___
 
   > 行政地区编码源于[中华人民共和国民政部](http://www.mca.gov.cn/)，更新于 `2019-06-21`。
 
+- **V3.0.1** - `2019.11.05`
 
-
+  > 行政地区编码源于[中华人民共和国民政部](http://www.mca.gov.cn/)，更新于 `2019-11-05`。
 ___
 
 
