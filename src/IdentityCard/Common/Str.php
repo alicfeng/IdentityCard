@@ -9,6 +9,11 @@
 
 namespace AlicFeng\IdentityCard\Common;
 
+/**
+ * Class Str.
+ * @deprecated
+ * @author  AlicFeng
+ */
 class Str
 {
     public static function mb_str_split($string): array

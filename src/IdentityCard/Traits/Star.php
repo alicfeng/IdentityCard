@@ -7,19 +7,17 @@
  * AlicFeng | a@samego.com
  */
 
-namespace AlicFeng\IdentityCard;
+namespace AlicFeng\IdentityCard\Traits;
 
-class Star
+trait Star
 {
     /**
-     * @functionName 根据月份以及日计算星座
-     *
+     * @function 根据月份以及日计算星座
      * @param int $month 月
      * @param int $day   日
-     *
      * @return bool|string
      */
-    public static function query($month, $day)
+    public function query($month, $day)
     {
         if ((1 == $month && $day >= 20) || (2 == $month && $day <= 18)) {
             return '水瓶座';

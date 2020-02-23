@@ -47,46 +47,45 @@ ___
 #### 使用
 
 ```php
-use AlicFeng\IdentityCard\IdentityCard;
-use AlicFeng\IdentityCard\Birthday;
+use AlicFeng\IdentityCard\InfoHelper;
 
 $id = 'IdentityCard';
 
 # 获取周岁 | 
-$age = IdentityCard::age($id);
+$age = InfoHelper::identityCard()->age($id);
 
 # 获取生日
-$birthday = IdentityCard::birthday($id);
+$birthday = InfoHelper::identityCard()->birthday($id);
 
 # 获取性别 | {男为M | 女为F}
-$sex = IdentityCard::sex($id);
+$sex = InfoHelper::identityCard()->sex($id);
 
 # 获取生肖
-$constellation = IdentityCard::constellation($id);
+$constellation = InfoHelper::identityCard()->constellation($id);
 
 # 获取星座
-$star = IdentityCard::star($id);
+$star = InfoHelper::identityCard()->star($id);
 
 # 获取星座
-$star = Birthday::star($birthday);
+$star = InfoHelper::birthday()->star($birthday);
 
 # 获取年龄
-$age = Birthday::age($id);
+$age = InfoHelper::birthday()->age($id);
 
 # 生成身份证正面
-$front(resource) = IdentityCard::createFrontImage(...);
+$front = InfoHelper::identityCard()->createFrontImage(...);
 
 # 生成身份证反面
-$back(resource) = IdentityCard::createBackImage(...);
+$back = InfoHelper::identityCard()->createBackImage(...);
 
 # 获取省
-$province = IdentityCard::privince($id, $default='');
+$province = InfoHelper::identityCard()->province($id, $default='');
 
 # 获取市
-$city = IdentityCard::city($id, $default='');
+$city = InfoHelper::identityCard()->city($id, $default='');
 
 # 获取区
-$area = IdentityCard::area($id, $default='');
+$area = InfoHelper::identityCard()->area($id, $default='');
 ```
 ___
 
@@ -114,4 +113,8 @@ ___
 
 - **V3.0.1** - `2019.11.05`
   行政地区编码源于[中华人民共和国民政部](http://www.mca.gov.cn/)，更新于 `2019-11-05`。
+  
+- **V3.1.0** - `2020.02.23`
+  行政地区编码源于[中华人民共和国民政部](http://www.mca.gov.cn/)，更新于 `2020-02-19`。
+  同时更新了内部实现的机制，调用的方法已经改变了，但是兼容低版本，建议更新旧的调用方法，将于2020.08.01不再支持旧的sdk
 

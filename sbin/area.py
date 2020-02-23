@@ -57,7 +57,7 @@ def generate_json(collect):
 
 
 if __name__ == '__main__':
-    url = 'http://www.mca.gov.cn/article/sj/xzqh/2019/2019/201911250933.html'
+    url = 'http://www.mca.gov.cn/article/sj/xzqh/2019/2019/202002191838.html'
     source = query_page_source(url)
     tr_list = query_td_tags(source)
     collect = generate_json_collect(tr_list)

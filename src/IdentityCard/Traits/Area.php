@@ -7,8 +7,9 @@
  * AlicFeng | a@samego.com
  */
 
-namespace AlicFeng\IdentityCard;
+namespace AlicFeng\IdentityCard\Traits;
 
+use AlicFeng\IdentityCard\Application\IdentityCard;
 use AlicFeng\IdentityCard\Data\Area as Data;
 use AlicFeng\IdentityCard\Exception\CertificateException;
 
@@ -17,7 +18,6 @@ use AlicFeng\IdentityCard\Exception\CertificateException;
  *
  * @description 使用身份证获取省、市、区行政地区中文名称
  * Class Area
- * @deprecated
  * @Author      AlicFeng
  * @datetime    2019-06-25
  * @website https://www.samego.com
@@ -27,76 +27,62 @@ use AlicFeng\IdentityCard\Exception\CertificateException;
 trait Area
 {
     /**
-     * @function 根据身份证号码获取省份中文名称
+     * @function     根据身份证号码获取省份中文名称
      * @description  根据身份证号码获取省份中文名称，支持给定默认值
      * @param string $id      身份证
      * @param string $default 省中文名称认值
      * @return string 省中文名称
      * @throws CertificateException
-     * @deprecated   please use InfoHelper::identity()->province instead
      */
-    public static function province(string $id, $default = '')
+    public function province(string $id, $default = '')
     {
         return self::common(2, $id, $default);
     }
 
     /**
-     * @function 根据身份证号码获取市份中文名称
+     * @function     根据身份证号码获取市份中文名称
      * @description  根据身份证号码获取市份中文名称，支持给定默认值
      * @param string $id      身份证
      * @param string $default 市中文名称认值
      * @return string 市中文名称
      * @throws CertificateException
-     * @deprecated   please use InfoHelper::identity()->city instead
      */
-    public static function city(string $id, $default = '')
+    public function city(string $id, $default = '')
     {
         return self::common(4, $id, $default);
     }
 
     /**
-     * @function 根据身份证号码获取区中文名称
+     * @function     根据身份证号码获取区中文名称
      * @description  根据身份证号码获取区中文名称，支持给定默认值
      * @param string $id      身份证
      * @param string $default 区中文名称认值
      * @return string 区中文名称
      * @throws CertificateException
-     * @deprecated   please use InfoHelper::identity()->area instead
      */
-    public static function area(string $id, $default = '')
+    public function area(string $id, $default = '')
     {
         return self::common(6, $id, $default);
     }
 
     /**
-     * @function 根据身份证号码获取行政地区中文名称
+     * @function     根据身份证号码获取行政地区中文名称
      * @description  根据身份证号码获取行政地区中文名称，支持给定默认值
      * @param int    $intelligence 截取身份证号码位数
      * @param string $id           身份证
      * @param string $default      编码对应行政地区中文名称
      * @return string 行政地区中文名称
      * @throws CertificateException
-     * @deprecated
      */
     private static function common(int $intelligence, string $id, $default = '')
     {
-        if (false === IdentityCard::validate($id)) {
+        $identityCard = new IdentityCard();
+        if (false === $identityCard->validate($id)) {
             throw new CertificateException();
         }
 
         $code = substr(substr($id, 0, $intelligence) . '0000', 0, 6);
 
         return Data::DATA[$code] ?? $default;
-    }
-
-    /**
-     * @function 获取中国所有行政地区中码表集合
-     * @description  获取中国所有行政地区中码表集合
-     * @return array
-     * @deprecated   please use InfoHelper::identity()->all instead
-     */
-    public static function all()
-    {
-        return Data::DATA;
     }
 }

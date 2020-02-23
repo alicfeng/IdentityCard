@@ -7,11 +7,13 @@
  * AlicFeng | a@samego.com
  */
 
-namespace AlicFeng\IdentityCard;
+namespace AlicFeng\IdentityCard\Application;
 
 use AlicFeng\IdentityCard\Data\Constellation;
 use AlicFeng\IdentityCard\Exception\CertificateException;
 use AlicFeng\IdentityCard\Helper\StringHelper;
+use AlicFeng\IdentityCard\Traits\Area;
+use AlicFeng\IdentityCard\Traits\Star;
 
 /**
  * 中国（大陆）公民身份证工具类.
@@ -19,34 +21,32 @@ use AlicFeng\IdentityCard\Helper\StringHelper;
  * @description 使用身份证计算年龄、生日、星座、性别、生肖、政区划代码，同时绘制身份证正反面
  * Class IdentityCard
  *
- * @deprecated  please use InfoHelper::identity()->function instead
  * @version     2.x 添加了异常捕获机制，针对证件ID捕获证件异常
  * @version     2.3 增加身份证正反面图片生成
  * @version     3.0.1 更新中华人民共和国行政区划代码
- * @Author      AlicFeng
- * @datetime    2019-11-27
- * @github  https://github.com/alicfeng
- * @email   a@samego.com
+ * @version     3.1.0 代码全新改版 同时使用方法也变了，暂时兼容旧的api😔将于2020.10.15不再支持
+ *
+ * @datetime    2020-02-23
  */
 class IdentityCard
 {
     use Area;
+    use Star;
 
     /*男:M 女:F*/
     const SIGN_MALE   = 'M';
     const SIGN_FEMALE = 'F';
 
     /**
-     * @funtction      获取性别
+     * @function       获取性别
      * @description    男为M | 女为F case 15 最后一位奇男偶女 case 18 倒数第二位奇男偶女
      * @param string $id 身份证号码
-     * @return string
+     * @return string sex
      * @throws CertificateException
-     * @deprecated     please use InfoHelper::identity()->sex instead
      */
-    public static function sex($id)
+    public function sex(string $id): string
     {
-        if (false === self::validate($id)) {
+        if (false === $this->validate($id)) {
             throw new CertificateException('certificate format error');
         }
         $signPick = intval(substr($id, (15 === strlen($id) ? -1 : -2), 1));
@@ -55,16 +55,15 @@ class IdentityCard
     }
 
     /**
-     * @funtction      获取出生年月日
+     * @function       获取出生年月日
      * @description    格式为 yyyy-mm-dd
      * @param string $id 身份证号码
-     * @return string
+     * @return string birthday
      * @throws CertificateException
-     * @deprecated     please use InfoHelper::identity()->birthday instead
      */
-    public static function birthday($id)
+    public function birthday(string $id): string
     {
-        if (false === self::validate($id)) {
+        if (false === $this->validate($id)) {
             throw new CertificateException('certificate format error');
         }
         $bir   = substr($id, 6, 8);
@@ -76,16 +75,15 @@ class IdentityCard
     }
 
     /**
-     * @funtction      根据身份证号码计算年龄
+     * @function       根据身份证号码计算年龄
      * @description    根据身份证号码计算年龄
      * @param string $id 身份证号码
-     * @return int
+     * @return int age
      * @throws CertificateException
-     * @deprecated     please use InfoHelper::identity()->age instead
      */
-    public static function age($id)
+    public function age(string $id): int
     {
-        if (false === self::validate($id)) {
+        if (false === $this->validate($id)) {
             throw new CertificateException('certificate format error');
         }
         $ageTime = strtotime(substr($id, 6, 8));
@@ -94,29 +92,28 @@ class IdentityCard
         }
         list($aYear, $aMonth, $aDay) = explode('-', date('Y-m-d', $ageTime));
 
-        $currentTime                 = time();
-        list($cYear, $cMonth, $cDay) = explode('-', date('Y-m-d', $currentTime));
+        $current_time                = time();
+        list($cYear, $cMonth, $cDay) = explode('-', date('Y-m-d', $current_time));
         $age                         = $cYear - $aYear;
         if ((int) ($cMonth . $cDay) < (int) ($aMonth . $aDay)) {
             --$age;
         }
 
-        unset($aYear, $aMonth, $aDay, $cYear, $cMonth, $cDay, $ageTime, $currentTime);
+        unset($aYear, $aMonth, $aDay, $cYear, $cMonth, $cDay, $ageTime, $current_time);
 
         return $age;
     }
 
     /**
-     * @funtction      获取生肖
+     * @function       获取生肖
      * @description    返回生肖的中文名称
      * @param string $id 身份证号码
-     * @return string
+     * @return string constellation
      * @throws CertificateException
-     * @deprecated     please use InfoHelper::identity()->constellation instead
      */
-    public static function constellation($id)
+    public function constellation(string $id): string
     {
-        if (false === self::validate($id)) {
+        if (false === $this->validate($id)) {
             throw new CertificateException('certificate format error');
         }
         $year = substr($id, 6, 4);
@@ -125,54 +122,51 @@ class IdentityCard
     }
 
     /**
-     * @funtction      获取星座
+     * @function       获取星座
      * @description    返回星座的中文名称
      * @param string $id 身份证号码
      * @return bool|string
      * @throws CertificateException
-     * @deprecated     please use InfoHelper::identity()->star instead
      */
-    public static function star($id)
+    public function star(string $id)
     {
-        if (false === self::validate($id)) {
+        if (false === $this->validate($id)) {
             throw new CertificateException('certificate format error');
         }
         $month = (int) substr($id, 10, 2);
         $day   = (int) substr($id, 12, 2);
 
-        return Star::query($month, $day);
+        return $this->query($month, $day);
     }
 
     /**
-     * @funtction      校验身份证证件的正确性
+     * @function       校验身份证证件的正确性
      * @description    校验身份证证件的正确性
      * @param string $id 身份证号码
-     * @return bool
-     * @deprecated     please use InfoHelper::identity()->validate instead
+     * @return bool validate
      */
-    public static function validate($id)
+    public function validate(string $id): bool
     {
         if (18 == strlen($id)) {
-            return self::check18IDCard($id);
+            return $this->check18IDCard($id);
         } elseif (15 == strlen($id)) {
-            $id = self::convert15to18($id);
+            $id = $this->convert15to18($id);
 
-            return self::check18IDCard($id);
+            return $this->check18IDCard($id);
         }
 
         return false;
     }
 
     /**
-     * @funtction    计算身份证的最后一位验证码
+     * @function     计算身份证的最后一位验证码
      * @description  根据国家标准GB 11643-1999，前提必须是18位的证件号
-     * @param string $idBody 证件号码的前17位数字
+     * @param string $id_body 证件号码的前17位数字
      * @return bool|mixed
-     * @deprecated   please use InfoHelper::identity()->calculateCode instead
      */
-    private static function calculateCode($idBody)
+    public function calculateCode(string $id_body)
     {
-        if (17 != strlen($idBody)) {
+        if (17 != strlen($id_body)) {
             return false;
         }
 
@@ -182,50 +176,48 @@ class IdentityCard
         $code     = ['1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'];
         $checksum = 0;
 
-        foreach (range(0, strlen($idBody) - 1) as $index => $item) {
-            $checksum += substr($idBody, $index, 1) * $factor[$index];
+        foreach (range(0, strlen($id_body) - 1) as $index => $item) {
+            $checksum += substr($id_body, $index, 1) * $factor[$index];
         }
 
         return $code[$checksum % 11];
     }
 
     /**
-     * @funtction  将15位身份证升级到18位
+     * @function  将15位身份证升级到18位
      * @param string $id 身份证号码
      * @return bool|string
-     * @deprecated please use InfoHelper::identity()->convert15to18 instead
      */
-    public static function convert15to18($id)
+    public function convert15to18(string $id)
     {
         if (15 != strlen($id)) {
             return false;
         }
         // 如果身份证顺序码是996 997 998 999，这些是为百岁以上老人的特殊编码
         if (false !== array_search(substr($id, 12, 3), ['996', '997', '998', '999'])) {
-            $idBody = substr($id, 0, 6) . '18' . substr($id, 6, 9);
+            $id_body = substr($id, 0, 6) . '18' . substr($id, 6, 9);
         } else {
-            $idBody = substr($id, 0, 6) . '19' . substr($id, 6, 9);
+            $id_body = substr($id, 0, 6) . '19' . substr($id, 6, 9);
         }
 
-        return $idBody . self::calculateCode($idBody);
+        return $id_body . $this->calculateCode($id_body);
     }
 
     /**
-     * @funtction  校验18位身份证的有效性
+     * @function 校验18位身份证的有效性
      * @param string $id 身份证号码
      * @return bool
-     * @deprecated please use InfoHelper::identity()->check18IDCard instead
      */
-    private static function check18IDCard($id)
+    private function check18IDCard(string $id)
     {
         if (18 != strlen($id)) {
             return false;
         }
 
-        $idBody = substr($id, 0, 17);
-        $code   = strtoupper(substr($id, 17, 1));
+        $id_body = substr($id, 0, 17);
+        $code    = strtoupper(substr($id, 17, 1));
 
-        if (self::calculateCode($idBody) == $code) {
+        if ($this->calculateCode($id_body) == $code) {
             return true;
         }
 
@@ -233,7 +225,7 @@ class IdentityCard
     }
 
     /**
-     * @function   生成身份证正面图片
+     * @function 生成身份证正面图片
      * @param string $name       姓名
      * @param string $gender     性别
      * @param string $nation     名族
@@ -243,7 +235,6 @@ class IdentityCard
      * @param string $image_path 背景图片 | 865 * 540px
      *
      * @return resource 图片资源句柄
-     * @deprecated please use InfoHelper::identity()->createFrontImage instead
      */
     public function createFrontImage(
         string $name,
@@ -283,13 +274,12 @@ class IdentityCard
     }
 
     /**
-     * @function   生成图片反面图片
+     * @function 生成图片反面图片
      * @param string $start_date 有效起期 | yyyy.mm.dd
      * @param string $end_date   有效止期 | yyyy.mm.dd
      * @param string $sign       签发机关
      * @param string $image_path 背景图片 | 865 * 540px
      * @return resource 图片资源句柄
-     * @deprecated please use InfoHelper::identity()->createBackImage instead
      */
     public function createBackImage(
         string $start_date,

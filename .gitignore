@@ -4,5 +4,5 @@
 back.png
 front.png
 .php_cs.cache
-/src/IdentityCard/Source/bbb.jpg
-/src/IdentityCard/Source/tmp.jpg
+/source/bbb.jpg
+/source/tmp.jpg

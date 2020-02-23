@@ -1,26 +1,27 @@
 <?php
-/**
- * Created by AlicFeng at 2019-06-25 00:37
+
+/*
+ * What samego team is that is 'one thing, a team, work together'
+ * Value comes from technology, technology comes from sharing~
+ * https://github.com/alicfeng/IdentityCard
+ * AlicFeng | a@samego.com
  */
 
 namespace Tests\Unit;
 
-
-use AlicFeng\IdentityCard\Area;
 use AlicFeng\IdentityCard\Exception\CertificateException;
-use AlicFeng\IdentityCard\IdentityCard;
-use Tests\BaseTestCase;
+use AlicFeng\IdentityCard\InfoHelper as Helper;
+use Tests\TestCase;
 
-class AreaTest extends BaseTestCase
+class AreaTest extends TestCase
 {
     public function testProvince()
     {
         try {
             $expect   = '广东省';
-            $province = IdentityCard::province(self::ID);
+            $province = Helper::identityCard()->province(self::ID);
             $this->assertEquals($expect, $province);
         } catch (CertificateException $e) {
-
         }
     }
 
@@ -28,10 +29,9 @@ class AreaTest extends BaseTestCase
     {
         try {
             $expect = '阳江市';
-            $city   = IdentityCard::city(self::ID);
+            $city   = Helper::identityCard()->city(self::ID);
             $this->assertEquals($expect, $city);
         } catch (CertificateException $e) {
-
         }
     }
 
@@ -39,10 +39,9 @@ class AreaTest extends BaseTestCase
     {
         try {
             $expect = '海陵岛';
-            $area   = IdentityCard::area(self::ID, $expect);
+            $area   = Helper::identityCard()->area(self::ID, $expect);
             $this->assertEquals($expect, $area);
         } catch (CertificateException $e) {
-
         }
     }
 }

@@ -31,6 +31,12 @@
   "require-dev": {
     "phpunit/phpunit": "@stable"
   },
+  "scripts": {
+  "php-cs": [
+    "php-cs-fixer fix src",
+    "php-cs-fixer fix tests"
+  ]
+},
   "minimum-stability": "stable",
   "require": {
     "ext-gd": "*",

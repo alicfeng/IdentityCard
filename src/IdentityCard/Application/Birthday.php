@@ -7,17 +7,16 @@
  * AlicFeng | a@samego.com
  */
 
-namespace AlicFeng\IdentityCard;
+namespace AlicFeng\IdentityCard\Application;
 
 use AlicFeng\IdentityCard\Exception\BirthdayException;
-use Exception;
+use AlicFeng\IdentityCard\Traits\Star;
 
 /**
  * 出生年月日工具类.
  *
  * @description 使用出生年月日计算年龄、星座
  * Class Birthday
- * @deprecated
  * @Author      AlicFeng
  * @datetime    2019-05-31
  * @website https://www.samego.com
@@ -26,14 +25,17 @@ use Exception;
  */
 class Birthday
 {
+    use Star;
+
     /**
-     * @funtction  通过生日获取年龄
+     * @function 通过生日获取年龄
+     *
      * @param int   $birthday 生日日期时间戳
      * @param mixed $current  参考日期时间戳
+     *
      * @return mixed 年龄
-     * @deprecated please use InfoHelper::birthday()->age instead
      */
-    public static function age($birthday, $current = false)
+    public function age($birthday, $current = false)
     {
         if (false === $current) {
             $current = time();
@@ -51,19 +53,21 @@ class Birthday
     }
 
     /**
-     * @function   根据生日计算星座.
+     * @function 根据生日计算星座.
+     *
      * @param int $birthday 出生年月日
+     *
      * @return bool|string
+     *
      * @throws BirthdayException
-     * @deprecated please use InfoHelper::birthday()->star instead
      */
-    public static function star($birthday)
+    public function star($birthday)
     {
         try {
             list(, $month, $day) = explode('-', date('Y-m-d', $birthday));
 
-            return Star::query($month, $day);
-        } catch (Exception $exception) {
+            return $this->query($month, $day);
+        } catch (\Exception $exception) {
             throw new BirthdayException('birthday value error');
         }
     }
