@@ -11,21 +11,28 @@ declare(strict_types=1);
 
 namespace AlicFeng\IdentityCard;
 
+use AlicFeng\IdentityCard\Application\Birthday;
+use AlicFeng\IdentityCard\Application\IdentityCard;
+
 /**
  * Class InfoHelper.
  *
- * @method static \AlicFeng\IdentityCard\Application\IdentityCard      identityCard()
- * @method static \AlicFeng\IdentityCard\Application\Birthday          birthday()
+ * @method static IdentityCard      identityCard()
+ * @method static Birthday          birthday()
  */
-class InfoHelper
+class Information
 {
+    private function __construct()
+    {
+    }
+
     /**
      * @description make application container(obj)
-     * @param $name
-     * @return mixed
+     * @param string $name
+     * @return IdentityCard | Birthday
      * @author      AlicFeng
      */
-    public static function make($name)
+    public static function make(string $name)
     {
         $namespace   = ucfirst($name);
         $application = "\\AlicFeng\\IdentityCard\\Application\\{$namespace}";
@@ -40,7 +47,7 @@ class InfoHelper
      * @return mixed
      * @author      AlicFeng
      */
-    public static function __callStatic($name, $arguments)
+    public static function __callStatic(string $name, array $arguments = [])
     {
         return self::make($name);
     }

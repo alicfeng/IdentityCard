@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * What samego team is that is 'one thing, a team, work together'
+ * What Samego team is that is 'one thing, a team, work together'
  * Value comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/IdentityCard
  * AlicFeng | a@samego.com
@@ -10,64 +12,64 @@
 namespace Tests\Unit;
 
 use AlicFeng\IdentityCard\Exception\CertificateException;
-use AlicFeng\IdentityCard\InfoHelper as Helper;
+use AlicFeng\IdentityCard\Information;
 use Tests\TestCase;
 
 class IdentityCardTest extends TestCase
 {
-    public function testGetBirthday()
+    public function testGetBirthday(): void
     {
         $expect = '1995-06-02';
 
         try {
-            $this->assertEquals($expect, Helper::identityCard()->birthday(self::ID));
+            $this->assertEquals($expect, Information::identityCard()->birthday(self::ID));
         } catch (CertificateException $e) {
         }
     }
 
-    public function testGetSex()
+    public function testGetSex(): void
     {
         $expect = 'M';
 
         try {
-            $this->assertEquals($expect, Helper::identityCard()->sex(self::ID));
+            $this->assertEquals($expect, Information::identityCard()->sex(self::ID));
         } catch (CertificateException $e) {
         }
     }
 
-    public function testGetAge()
+    public function testGetAge(): void
     {
-        $expect = 24;
+        $expect = 26;
 
         try {
-            $this->assertEquals($expect, Helper::identityCard()->age(self::ID));
+            $this->assertEquals($expect, Information::identityCard()->age(self::ID));
         } catch (CertificateException $e) {
         }
     }
 
-    public function testGetConstellation()
+    public function testGetConstellation(): void
     {
         $expect = '猪';
 
         try {
-            $this->assertEquals($expect, Helper::identityCard()->constellation(self::ID));
+            $this->assertEquals($expect, Information::identityCard()->constellation(self::ID));
         } catch (CertificateException $e) {
         }
     }
 
-    public function ttestGetStar()
+    public function testGetStar(): void
     {
         $expect = '双子座';
 
         try {
-            $this->assertEquals($expect, Helper::identityCard()->star(self::ID));
+            $this->assertEquals($expect, Information::identityCard()->star(self::ID));
         } catch (CertificateException $e) {
         }
     }
 
-    public function testCreateIdCardImage()
+    public function testCreateIdCardImage(): void
     {
-        $frontImage = Helper::identityCard()->createFrontImage(
+        $frontImage = Information::identityCard()->createFrontImage(
             '冯大叔',
             '男',
             '汉',
@@ -78,7 +80,7 @@ class IdentityCardTest extends TestCase
         imagepng($frontImage, 'front.png');
         imagedestroy($frontImage);
 
-        $backImage = Helper::identityCard()->createBackImage(
+        $backImage = Information::identityCard()->createBackImage(
             '2016.06.02',
             '2026.12.08'
         );

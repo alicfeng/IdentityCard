@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * What samego team is that is 'one thing, a team, work together'
+ * What Samego team is that is 'one thing, a team, work together'
  * Value comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/IdentityCard
  * AlicFeng | a@samego.com
@@ -34,8 +36,8 @@ class IdentityCard
     use Star;
 
     /*男:M 女:F*/
-    const SIGN_MALE   = 'M';
-    const SIGN_FEMALE = 'F';
+    public const SIGN_MALE   = 'M';
+    public const SIGN_FEMALE = 'F';
 
     /**
      * @function       获取性别
@@ -92,8 +94,8 @@ class IdentityCard
         }
         list($aYear, $aMonth, $aDay) = explode('-', date('Y-m-d', $ageTime));
 
-        $current_time                = time();
-        list($cYear, $cMonth, $cDay) = explode('-', date('Y-m-d', $current_time));
+        $currentTime                 = time();
+        list($cYear, $cMonth, $cDay) = explode('-', date('Y-m-d', $currentTime));
         $age                         = $cYear - $aYear;
         if ((int) ($cMonth . $cDay) < (int) ($aMonth . $aDay)) {
             --$age;
@@ -125,10 +127,10 @@ class IdentityCard
      * @function       获取星座
      * @description    返回星座的中文名称
      * @param string $id 身份证号码
-     * @return bool|string
+     * @return string
      * @throws CertificateException
      */
-    public function star(string $id)
+    public function star(string $id): string
     {
         if (false === $this->validate($id)) {
             throw new CertificateException('certificate format error');
@@ -162,7 +164,7 @@ class IdentityCard
      * @function     计算身份证的最后一位验证码
      * @description  根据国家标准GB 11643-1999，前提必须是18位的证件号
      * @param string $id_body 证件号码的前17位数字
-     * @return bool|mixed
+     * @return bool|string
      */
     public function calculateCode(string $id_body)
     {
@@ -208,7 +210,7 @@ class IdentityCard
      * @param string $id 身份证号码
      * @return bool
      */
-    private function check18IDCard(string $id)
+    private function check18IDCard(string $id): bool
     {
         if (18 != strlen($id)) {
             return false;

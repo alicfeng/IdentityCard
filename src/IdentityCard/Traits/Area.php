@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * What samego team is that is 'one thing, a team, work together'
+ * What Samego team is that is 'one thing, a team, work together'
  * Value comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/IdentityCard
  * AlicFeng | a@samego.com
@@ -34,7 +36,7 @@ trait Area
      * @return string 省中文名称
      * @throws CertificateException
      */
-    public function province(string $id, $default = '')
+    public function province(string $id, string $default = ''): string
     {
         return self::common(2, $id, $default);
     }
@@ -47,7 +49,7 @@ trait Area
      * @return string 市中文名称
      * @throws CertificateException
      */
-    public function city(string $id, $default = '')
+    public function city(string $id, string $default = ''): string
     {
         return self::common(4, $id, $default);
     }
@@ -60,7 +62,7 @@ trait Area
      * @return string 区中文名称
      * @throws CertificateException
      */
-    public function area(string $id, $default = '')
+    public function area(string $id, string $default = ''): string
     {
         return self::common(6, $id, $default);
     }
@@ -74,11 +76,11 @@ trait Area
      * @return string 行政地区中文名称
      * @throws CertificateException
      */
-    private static function common(int $intelligence, string $id, $default = '')
+    private static function common(int $intelligence, string $id, string $default = ''): string
     {
         $identityCard = new IdentityCard();
         if (false === $identityCard->validate($id)) {
-            throw new CertificateException();
+            throw new CertificateException('identity card value illegal');
         }
 
         $code = substr(substr($id, 0, $intelligence) . '0000', 0, 6);

@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * What samego team is that is 'one thing, a team, work together'
+ * What Samego team is that is 'one thing, a team, work together'
  * Value comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/IdentityCard
  * AlicFeng | a@samego.com
@@ -11,7 +13,7 @@ namespace AlicFeng\IdentityCard\Data;
 
 class Area
 {
-    const DATA = [
+    public const DATA = [
         '110000' => '北京市',
         '110101' => '东城区',
         '110102' => '西城区',

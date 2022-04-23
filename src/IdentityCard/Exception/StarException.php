@@ -13,6 +13,6 @@ namespace AlicFeng\IdentityCard\Exception;
 
 use Exception;
 
-class CertificateException extends Exception
+class StarException extends Exception
 {
 }
