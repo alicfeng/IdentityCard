@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * What samego team is that is 'one thing, a team, work together'
+ * What Samego team is that is 'one thing, a team, work together'
  * Value comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/IdentityCard
  * AlicFeng | a@samego.com
@@ -33,8 +35,8 @@ class IdentityCard
     use Area;
 
     /*男:M 女:F*/
-    const SIGN_MALE   = 'M';
-    const SIGN_FEMALE = 'F';
+    public const SIGN_MALE   = 'M';
+    public const SIGN_FEMALE = 'F';
 
     /**
      * @funtction      获取性别

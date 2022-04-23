@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * What samego team is that is 'one thing, a team, work together'
+ * What Samego team is that is 'one thing, a team, work together'
  * Value comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/IdentityCard
  * AlicFeng | a@samego.com
@@ -30,14 +32,14 @@ class Birthday
     /**
      * @function 通过生日获取年龄
      *
-     * @param int   $birthday 生日日期时间戳
-     * @param mixed $current  参考日期时间戳
+     * @param int $birthday 生日日期时间戳
+     * @param int $current  参考日期时间戳
      *
-     * @return mixed 年龄
+     * @return int 年龄
      */
-    public function age($birthday, $current = false)
+    public function age(int $birthday, int $current = 0): int
     {
-        if (false === $current) {
+        if (0 === $current) {
             $current = time();
         }
         list($birthdayYear, $birthdayMonth, $birthdayDay) = explode('-', date('Y-m-d', $birthday));
@@ -54,19 +56,16 @@ class Birthday
 
     /**
      * @function 根据生日计算星座.
-     *
      * @param int $birthday 出生年月日
-     *
-     * @return bool|string
-     *
+     * @return string
      * @throws BirthdayException
      */
-    public function star($birthday)
+    public function star(int $birthday): string
     {
         try {
             list(, $month, $day) = explode('-', date('Y-m-d', $birthday));
 
-            return $this->query($month, $day);
+            return $this->query((int) $month, (int) $day);
         } catch (\Exception $exception) {
             throw new BirthdayException('birthday value error');
         }

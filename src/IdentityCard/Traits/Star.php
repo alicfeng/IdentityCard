@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 /*
- * What samego team is that is 'one thing, a team, work together'
+ * What Samego team is that is 'one thing, a team, work together'
  * Value comes from technology, technology comes from sharing~
  * https://github.com/alicfeng/IdentityCard
  * AlicFeng | a@samego.com
@@ -9,15 +11,18 @@
 
 namespace AlicFeng\IdentityCard\Traits;
 
+use AlicFeng\IdentityCard\Exception\StarException;
+
 trait Star
 {
     /**
      * @function 根据月份以及日计算星座
      * @param int $month 月
      * @param int $day   日
-     * @return bool|string
+     * @return string
+     * @throws StarException
      */
-    public function query($month, $day)
+    public function query(int $month, int $day): string
     {
         if ((1 == $month && $day >= 20) || (2 == $month && $day <= 18)) {
             return '水瓶座';
@@ -45,6 +50,6 @@ trait Star
             return '魔羯座';
         }
 
-        return false;
+        throw new StarException("parameter illegal [month:{$month} day:{$day}]");
     }
 }

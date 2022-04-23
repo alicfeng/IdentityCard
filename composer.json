@@ -29,16 +29,18 @@
     }
   },
   "require-dev": {
-    "phpunit/phpunit": "@stable"
+    "phpunit/phpunit": "@stable",
+    "friendsofphp/php-cs-fixer": "3.0"
   },
   "scripts": {
-  "php-cs": [
-    "php-cs-fixer fix src",
-    "php-cs-fixer fix tests"
-  ]
-},
+    "cs": [
+      "./vendor/bin/php-cs-fixer fix src --diff",
+      "./vendor/bin/php-cs-fixer fix tests --diff"
+    ]
+  },
   "minimum-stability": "stable",
   "require": {
+    "php": ">=7.1",
     "ext-gd": "*",
     "ext-iconv": "*"
   }

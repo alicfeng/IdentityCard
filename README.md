@@ -23,73 +23,60 @@
 
 
 
-#### 安装
-
-在项目`composer.json`添加依赖，如下：
-
-```
-"require": {
-    "alicfeng/identity-card": "~3.1.0"
-  }
-```
-
-或者直接通过`CLI`安装，如下：
+## 🪤 快速安装
 
 ```shell
-composer require "alicfeng/identity-card" -vvv
+composer require "alicfeng/identity-card" --optimize-autoloader -vvv
 ```
 
 
 
-___
-
-
-#### 使用
+## 🚀 快速使用
 
 ```php
-use AlicFeng\IdentityCard\InfoHelper;
+use AlicFeng\IdentityCard\Information;
 
 $id = 'IdentityCard';
 
 # 获取周岁 | 
-$age = InfoHelper::identityCard()->age($id);
+$age = Information::identityCard()->age($id);
 
 # 获取生日
-$birthday = InfoHelper::identityCard()->birthday($id);
+$birthday = Information::identityCard()->birthday($id);
 
 # 获取性别 | {男为M | 女为F}
-$sex = InfoHelper::identityCard()->sex($id);
+$sex = Information::identityCard()->sex($id);
 
 # 获取生肖
-$constellation = InfoHelper::identityCard()->constellation($id);
+$constellation = Information::identityCard()->constellation($id);
 
 # 获取星座
-$star = InfoHelper::identityCard()->star($id);
+$star = Information::identityCard()->star($id);
 
 # 获取星座
-$star = InfoHelper::birthday()->star($birthday);
+$star = Information::birthday()->star($birthday);
 
 # 获取年龄
-$age = InfoHelper::birthday()->age($id);
+$age = Information::birthday()->age($id);
 
 # 生成身份证正面
-$front = InfoHelper::identityCard()->createFrontImage(...);
+$front = Information::identityCard()->createFrontImage(...);
 
 # 生成身份证反面
-$back = InfoHelper::identityCard()->createBackImage(...);
+$back = Information::identityCard()->createBackImage(...);
 
 # 获取省
-$province = InfoHelper::identityCard()->province($id, $default='');
+$province = Information::identityCard()->province($id, $default='');
 
 # 获取市
-$city = InfoHelper::identityCard()->city($id, $default='');
+$city = Information::identityCard()->city($id, $default='');
 
 # 获取区
-$area = InfoHelper::identityCard()->area($id, $default='');
+$area = Information::identityCard()->area($id, $default='');
 ```
 ___
 
-#### 版本更新说明
+## 🏷 更新说明
 
 - **V1.0**
 
