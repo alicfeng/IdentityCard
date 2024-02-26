@@ -20,9 +20,12 @@ def query_td_tags(html):
 
 # 根据tr列表数据构建集合
 def generate_json_collect(tr_list):
+    # print(tr_list)
     collect = {}
     for tr in tr_list:
         td_list = tr.findAll('td')
+        if td_list[1].string is None or td_list[2].text is None:
+            continue
         collect[td_list[1].string.strip()] = td_list[2].text.strip()
     return collect
 
@@ -35,9 +38,9 @@ def generate_php_collect(collect):
         file.write('<?php\n\n')
         file.write('namespace AlicFeng\IdentityCard\Data;\n')
         file.write('class Area\n{\n')
-        file.write('\tconst DATA = [\n')
+        file.write('\tpublic const DATA = [\n')
         for key, value in collect.items():
-            file.write('\t\t' + '\'' + key.strip() + '\'=>' + '\'' + value.strip() + '\',\n')
+            file.write('\t\t' + '\'' + key.strip() + '\' => ' + '\'' + value.strip() + '\',\n')
         file.write('];\n}\n')
         file.flush()
         file.close()
@@ -58,6 +61,7 @@ def generate_json(collect):
 
 if __name__ == '__main__':
     url = 'http://www.mca.gov.cn/article/sj/xzqh/2019/2019/202002191838.html'
+    url = 'https://www.mca.gov.cn/mzsj/xzqh/2022/202201xzqh.html'
     source = query_page_source(url)
     tr_list = query_td_tags(source)
     collect = generate_json_collect(tr_list)

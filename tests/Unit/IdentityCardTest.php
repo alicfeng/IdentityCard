@@ -39,7 +39,7 @@ class IdentityCardTest extends TestCase
 
     public function testGetAge(): void
     {
-        $expect = 26;
+        $expect = 28;
 
         try {
             $this->assertEquals($expect, Information::identityCard()->age(self::ID));
